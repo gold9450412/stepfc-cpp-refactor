@@ -136,6 +136,34 @@ bool parse_header(const std::array<uint8_t, 16>& raw, NesHeader &out) {
 - `constexpr uint8_t` 直接可用 `flags6 & Flags6::Trainer`，不需要重載
 - `enum class` 適合「分類列舉值」（如 ErrorCode），`constexpr` 適合「數值常數」（如遮罩）
 
+### 6.5 `enum class` vs `constexpr` 隱式轉換的釐清
+**重點：真正擋隱式轉換的是 `enum class`，不是 `constexpr`。**
+
+```cpp
+constexpr uint8_t SaveRam = 0x02;
+int x = SaveRam;  // ✅ 可以！uint8_t → int 是標準數值提升
+
+enum class ErrorCode { Ok, FileNotFound };
+int y = ErrorCode::Ok;  // ❌ 編譯錯誤！enum class 擋隱式轉換
+```
+
+| 特性 | `enum class` | `constexpr` + namespace |
+|------|-------------|------------------------|
+| 擋隱式轉 int | ✅ | ❌ |
+| 解決名稱衝突 | ✅ | ✅ |
+| 支援位元運算 | ❌（要重載） | ✅ |
+
+- Flags 用 `constexpr` 是為了位元運算方便，**接受**隱式轉換不擋
+- Flags 本來就是整數遮罩，轉成 int 沒有危險，跟 ErrorCode 那種「分類列舉」性質不同
+- `enum class` 的正確用法：
+  ```cpp
+  // 跟同類型比（最常用）
+  if (result == ErrorCode::Ok) { ... }  // ✅
+  // 真的需要 int 時，顯式轉換
+  int z = static_cast<int>(ErrorCode::Ok);  // ✅ 明確轉型
+  // 不能寫 if (result == 0)，編譯器會擋
+  ```
+
 ### 7. 命名：`prg_rom_count` vs `prg_rom_size`
 - 初版用 `prg_rom_size`，但存的不是 byte 數，是「單位數量」（幾個 16KB）
 - `count` 比 `size` 語意更準確

@@ -225,11 +225,11 @@ RomLoader 是短命物件（讀完即丟），不該被模擬器長期持有。
 ---
 
 ### Stage 9: 主程式 (`main.cpp`)
-- [ ] 用 `std::make_unique<FileRomLoader>` 建立 loader（展示 `unique_ptr` 多型）
-- [ ] 呼叫 `loader->load(info)` 載入 ROM
-- [ ] 用 `std::move(info)` 將 RomInfo 移入 `Famicom`
-- [ ] loader 離開作用域自動釋放（RAII）
-- [ ] 印出 ROM 資訊，確認輸出正確
+- [x] 用 `std::make_unique<FileRomLoader>` 建立 loader（展示 `unique_ptr` 多型）
+- [x] 呼叫 `loader->load(info)` 載入 ROM
+- [x] 用 `std::move(info)` 將 RomInfo 移入 `Famicom`
+- [x] loader 離開作用域自動釋放（RAII）
+- [x] 印出 ROM 資訊，確認輸出正確
 
 **需安裝**：無
 
@@ -240,9 +240,9 @@ RomLoader 是短命物件（讀完即丟），不該被模擬器長期持有。
 ---
 
 ### Stage 10: 測試環境建置 (`tests/CMakeLists.txt`)
-- [ ] CMake `FetchContent` 抓取 Google Test
-- [ ] 最小 smoke test 確認能跑
-- [ ] `ctest` 通過
+- [x] CMake `FetchContent` 抓取 Google Test
+- [x] 最小 smoke test 確認能跑
+- [x] `ctest` 通過
 
 **需安裝**：Google Test（CMake 自動抓取，**不用手動安裝**）
 
@@ -251,10 +251,10 @@ RomLoader 是短命物件（讀完即丟），不該被模擬器長期持有。
 ---
 
 ### Stage 11: ROM 資訊測試 (`tests/test_rom_info.cpp`)
-- [ ] 測試初始狀態（`is_loaded() == false`）
-- [ ] 測試 getter 回傳正確值（建構後填入資料再驗證）
-- [ ] 測試 const 介面（const reference 上只能呼叫 const 方法）
-- [ ] 至少 3 個 TEST case
+- [x] 測試初始狀態（`is_loaded() == false`）
+- [x] 測試 getter 回傳正確值（建構後填入資料再驗證）
+- [x] 測試 const 介面（const reference 上只能呼叫 const 方法）
+- [x] 至少 3 個 TEST case
 
 **需安裝**：Google Test（Stage 10 已設定）
 
@@ -263,10 +263,10 @@ RomLoader 是短命物件（讀完即丟），不該被模擬器長期持有。
 ---
 
 ### Stage 12: 檔案讀取測試 (`tests/test_file_rom_loader.cpp`)
-- [ ] 測試讀取 `nestest.nes` — 驗證 PRG/CHR count、mapper、mirroring
-- [ ] 測試讀取不存在的檔案 — 驗證回傳 `ErrorCode::FileNotFound`
-- [ ] 測試讀取非法檔案（magic 不符）— 驗證回傳 `ErrorCode::IllegalFile`
-- [ ] 至少 3 個 TEST case
+- [x] 測試讀取 `nestest.nes` — 驗證 PRG/CHR count、mapper、mirroring
+- [x] 測試讀取不存在的檔案 — 驗證回傳 `ErrorCode::FileNotFound`
+- [x] 測試讀取非法檔案（magic 不符）— 驗證回傳 `ErrorCode::IllegalFile`
+- [x] 至少 3 個 TEST case
 
 **需安裝**：Google Test（Stage 10 已設定）
 

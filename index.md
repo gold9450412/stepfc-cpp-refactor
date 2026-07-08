@@ -24,3 +24,7 @@ title: 首頁
 | 6 | 檔案讀取 — 讀取 PRG/CHR 資料 (file_rom_loader.cpp 中半) | [查看](journal/stage06.html) |
 | 7 | 解析 Flags 填入 ROM 資訊 (file_rom_loader.cpp 後半) | [查看](journal/stage07.html) |
 | 8 | 模擬器主體 (famicom.h / famicom.cpp) | [查看](journal/stage08.html) |
+| 9 | 主程式 (main.cpp) | [查看](journal/stage09.html) |
+| 10 | 測試環境建置 (Google Test) | [查看](journal/stage10.html) |
+| 11 | ROM 資訊測試 (test_rom_info.cpp) | [查看](journal/stage11.html) |
+| 12 | 檔案讀取測試 (test_file_rom_loader.cpp) | [查看](journal/stage12.html) |
