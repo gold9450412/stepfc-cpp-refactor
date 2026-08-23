@@ -1,4 +1,4 @@
 title: StepFC C++ 重構日誌
-description: Step0 NES ROM Loader 的現代 C++ 重構過程
+description: StepFC 各 Step 的現代 C++ 重構過程（Step0: NES ROM Loader, Step1: CPU Memory Map）
 theme: jekyll-theme-cayman
 markdown: kramdown
