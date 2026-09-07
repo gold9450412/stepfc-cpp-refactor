@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Stage 10 日誌：測試環境建置 (tests/CMakeLists.txt)"
+---
+
 # Stage 10 日誌：測試環境建置 (tests/CMakeLists.txt)
 
 ## 日期

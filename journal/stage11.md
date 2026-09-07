@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Stage 11 日誌：ROM 資訊測試 (test_rom_info.cpp)"
+---
+
 # Stage 11 日誌：ROM 資訊測試 (test_rom_info.cpp)
 
 ## 日期

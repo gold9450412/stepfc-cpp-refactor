@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Stage 12 日誌：檔案讀取測試 (test_file_rom_loader.cpp)"
+---
+
 # Stage 12 日誌：檔案讀取測試 (test_file_rom_loader.cpp)
 
 ## 日期

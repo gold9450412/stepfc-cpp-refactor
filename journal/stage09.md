@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Stage 9 日誌：主程式 (main.cpp)"
+---
+
 # Stage 9 日誌：主程式 (main.cpp)
 
 ## 日期
