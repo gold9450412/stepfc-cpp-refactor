@@ -47,6 +47,7 @@ const InstructionInfo& lookup(uint8_t opcode);
 
 ### src/nes/instruction_table.cpp（304 行，節錄）
 ```cpp
+{% raw %}
 #include <array>
 
 #include "instruction_table.h"
@@ -85,6 +86,7 @@ const InstructionInfo& lookup(uint8_t opcode) {
 }
 
 } // namespace nes
+{% endraw %}
 ```
 
 ---
@@ -176,8 +178,10 @@ error: 'AXS' is not a member of 'nes::Instruction'
 表內容反覆驗證都是整整齊齊的 256 條（256 個 entry、256 個不重複 opcode 註解），錯誤卻一直都在。用二分法隔離（1 條 OK、2 條 OK、3 條爆、跟 enum 無關、連純 `int` struct 都爆），最後確認是 **GCC 11 的 brace elision 解譯問題**：
 
 ```cpp
+{% raw %}
 std::array<S, 256> t = { {...}, {...}, {...} };   // 單層 → GCC 11 解譯錯誤
 std::array<S, 256> t = {{ {...}, {...}, {...} }}; // 雙層 → 正確
+{% endraw %}
 ```
 
 **原理**：`std::array` 內部是 `struct { T __elems[N]; }`——包著一條 C 陣列的 struct。嚴格的初始化要**兩層 brace**（外層給 struct、內層給 C 陣列），單層寫法靠「括號省略」規則通融，但 GCC 11 在巢狀情境會把第一個元素吃錯位置，後面全算成多的。**結論：`std::array` 初始化永遠寫雙層 brace 最穩。**
@@ -194,7 +198,7 @@ std::array<S, 256> t = {{ {...}, {...}, {...} }}; // 雙層 → 正確
 - 每行行尾的 `// 0x` opcode 註解非常好：對照矩陣除錯時一眼定位，是資料表的良好實務
 - unofficial 標 `*` + `// ---` 分區註解清楚
 - 分 4 批填 + 每批人工對照 nesdev，流程穩，只有 2 個錯且都不是表資料本身
-- 雙層 brace 的 `= {{ ... }}` 之後維持這個寫法
+- 雙層 brace 的 `{% raw %}= {{ ... }}{% endraw %}` 之後維持這個寫法
 
 ## 學習心得
 
@@ -204,5 +208,5 @@ std::array<S, 256> t = {{ {...}, {...}, {...} }}; // 雙層 → 正確
 4. **nesdev 記法**：空 → 1B、`d`/`#i` → 2B、`a` → 3B；KIL 在該頁叫 STP
 5. **定址模式與資料來源是正交的**：一個 AbsoluteX 服務所有「位址 = a + X」的指令
 6. **暫存器分工 = 指令集形狀**：X/Y 接位址線路、A 接 ALU
-7. **`std::array` 永遠雙層 brace**：`{{ ... }}`，單層靠 elision 在 GCC 11 會踩雷
+7. **`std::array` 永遠雙層 brace**：`{% raw %}{{ ... }}{% endraw %}`，單層靠 elision 在 GCC 11 會踩雷
 8. **讓型別排除非法狀態**（uint8_t 索引 256 格免檢查）比 runtime 防禦好
