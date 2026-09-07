@@ -5,7 +5,7 @@ title: 首頁
 
 # StepFC C++ 重構日誌
 
-將 StepFC 的 Step0（讀取 NES ROM）、Step1（CPU 記憶體位址空間 + Mapper000 + 中斷向量）用現代 C++ 重新實作的完整開發記錄。
+將 StepFC 的 Step0（讀取 NES ROM）、Step1（CPU 記憶體位址空間 + Mapper000 + 中斷向量）、Step2（6502 反組譯器）用現代 C++ 重新實作的完整開發記錄。
 
 ## 各 Step
 
@@ -13,6 +13,7 @@ title: 首頁
 |------|------|------|
 | Step0 | NES ROM Loader（iNES 格式解析、RomInfo、FileRomLoader、Famicom） | [進入](SPEC.html) |
 | Step1 | CPU 記憶體位址空間 + Mapper000 NROM + 中斷向量 | [進入](step1/index.html) |
+| Step2 | 6502 反組譯器（指令表、13 種定址模式、CPU 暫存器、Disassembler） | [進入](step2/index.html) |
 
 ## Step0 開發日誌
 
